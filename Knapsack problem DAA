@@ -1,0 +1,45 @@
+#include<stdio.h>
+ int max(int a, int b) { 
+	return (a > b)? a : b; 
+} 
+int knapsack(int w[], int p[], int n, int W) {
+
+    // Base case: If the capacity of the knapsack is 0, return 0
+    if (W == 0) 
+        return 0;
+
+    // Base case: If no more items are left, return 0
+    if (n == 0) 
+        return 0;
+
+    // If the current item weighs more than the capacity of the knapsack, it cannot be included
+    if (w[n - 1] > W) 
+        return knapsack(w, p, n - 1, W);
+    
+    // Otherwise, return the maximum value of profit
+    return max(p[n - 1] + knapsack(w, p, n - 1, W - w[n - 1]), 
+               knapsack(w, p, n - 1, W));
+}
+
+int main() {
+    int i,n;
+    int W;  
+    int Max; 
+ 
+    printf("Enter the no. of items: ");
+    scanf("%d", &n);
+ 
+    int w[n];  
+    int p[n];  
+ 
+    printf("Enter the weight and price of all items\n");
+    for(i = 0;i < n;i++){
+        scanf("%d%d", &w[i], &p[i]);
+    }
+ 
+    printf("enter the capacity of knapsack: ");
+    scanf("%d", &W);
+    Max =  knapsack(w,p,n,W);
+    printf("The maximum value of items that can be put into knapsack is %d ", Max);
+    return 0;
+}
