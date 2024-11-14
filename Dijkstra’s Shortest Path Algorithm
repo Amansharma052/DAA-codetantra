@@ -1,4 +1,13 @@
 #include<stdio.h>
+#include<limits.h>
+
+#define V_MAX 100
+#define infinity INT_MAX
+
+void Dijkstra(int a[V_MAX][V_MAX], int n, int source) {
+    int dist[V_MAX], visited[V_MAX], i, j, minDist, nextNode;
+    
+    // Initialization
     for (i = 0; i < n; i++) {
         dist[i] = infinity;
         visited[i] = 0;
@@ -19,8 +28,7 @@
         }
 
         visited[nextNode] = 1;
-
-        // Update distance values of adjacent vertices of the selected vertex        
+// Update distance values of adjacent vertices of the selected vertex        
 		for (j = 0; j < n; j++) {
             if (!visited[j] && a[nextNode][j] && dist[nextNode] != infinity && dist[nextNode] + a[nextNode][j] < dist[j]) {
                 dist[j] = dist[nextNode] + a[nextNode][j];
