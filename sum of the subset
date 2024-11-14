@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int Sum_subset (int array [], int n, int sum, int subset [], int subsetSize)
+
+{
+
+if(sum==0){
+
+for(int i=0;i<subsetSize;i++){
+
+printf("%d ", subset[i]);
+
+}
+
+printf("\n");
+
+return 1;
+
+}
+
+if(n==0 && sum!= 0)
+
+return 0;
+int without_last=Sum_subset (array, n-1, sum, subset, subsetSize);
+
+int subset_with_last[100];
+
+for(int i=0;i<subsetSize;i++){
+
+subset_with_last[i]=subset[i];}subset_with_last [subsetSize]=array [n-1];
+
+int with_last=Sum_subset(array, n-1, sum-array [n-1], subset_with_last, subsetSize+1);
+
+return with_last || without_last;}
+
+void main() {
+int n,array[50],sum,i,subset[50];
+
+scanf("%d",&n);
+
+for(i=0;i<n;i++){
+
+scanf("%d",&array[i]);}
+
+scanf("%d", &sum);
+int result =Sum_subset(array, n, sum, subset, 0);
+
+if(!result) {
+
+printf("not possible");
+
+}
+
+}
